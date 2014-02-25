@@ -4,7 +4,8 @@ import requests
 import json
 import subprocess
 import os
-from config import COMMANDS
+from config import COMMANDS, COMMAND_KEYWORD, WOLFRAM_ALPHA_API_KEY, VOICE
+from bs4 import BeautifulSoup
 
 CHUNK = 1024
 FORMAT = pyaudio.paInt16
@@ -80,13 +81,32 @@ def transcribe(speech):
 
 def detect_command(data):
     match = False
-    for alt in data['result'][0]['alternative']:
-        for com in COMMANDS.keys():
-            if alt['transcript'] == com:
-                match = True
-                for step in COMMANDS[com]:
-                    subprocess.call(step)
+    if not data:
+        pass
+    else:
+        for alt in data['result'][0]['alternative']:
+            for com in COMMANDS.keys():
+                if alt['transcript'] == COMMAND_KEYWORD + ' ' + com:
+                    match = True
+                    for step in COMMANDS[com]:
+                        subprocess.call(step)
+                    break
+            if match:
                 break
-        if match:
-            break
+        else:
+            text = data['result'][0]['alternative'][0]['transcript'].split()
+            if text[0] == COMMAND_KEYWORD:
+                wolfram_query_params = {
+                    'input': ' '.join(text[1:]),
+                    'appid': WOLFRAM_ALPHA_API_KEY,
+                }
+                r = requests.get('http://api.wolframalpha.com/v2/query', params=wolfram_query_params)
+                soup = BeautifulSoup(r.text)
+                if soup.find(id='Result'):  # handles a clear result
+                    results = soup.find(id='Result').plaintext.string
+                elif soup.find(id='InstantaneousWeather:WeatherData'):  # handles a weather result
+                    results = soup.find(id='InstantaneousWeather:WeatherData').plaintext.string
+                else:
+                    print(soup.prettify())
+                subprocess.call(['say', '-v', VOICE, results])
 

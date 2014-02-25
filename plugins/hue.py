@@ -2,14 +2,16 @@ import sys
 
 import requests
 
+HUE_IP = '10.0.1.19'
+HUE_USER = 'maximillianvitek'
+
 # get the commandline arguments
 cmd = str(sys.argv)
 targetLight = sys.argv[1]
 targetCmd = sys.argv[2]
 
 # network setup
-hueIP = '10.0.1.19'
-hueURL = 'http://' + hueIP + '/api/maximillianvitek/lights/'
+hueURL = 'http://' + HUE_IP + '/api/' + HUE_USER + '/lights/'
 
 if targetCmd == 'off':
     reqData = "{\"on\":false}"
