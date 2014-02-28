@@ -1,11 +1,10 @@
 __author__ = 'maxvitek'
-from plugins.yweather import get_weather
 
 WOLFRAM_ALPHA_API_KEY = 'Q9YE6Y-HRXTP4K8G9'
 
 VOICE = 'Oliver'
 
-COMMAND_KEYWORD = 'Jarvis'
+COMMAND_KEYWORD = 'Marvin'
 
 COMMANDS = {
     'device status': [
@@ -14,6 +13,7 @@ COMMANDS = {
     ],
     'unleash the robots': [
         ['say', '-v', VOICE, '"unleashing the robots"'],
+        ['python', 'plugins/roomba.py', '--idle'],
         ['python', 'plugins/roomba.py', '--clean']
     ],
     'dock the robots': [
@@ -28,21 +28,21 @@ COMMANDS = {
         ['say', '-v', VOICE, '"turning off the office light"'],
         ['ssh', 'hector', 'wemo', '-f', 'switch', 'officelight', 'on']
     ],
-    'turn on the bedroom tv': [
-        ['say', '-v', VOICE, '"turning on the bedroom tv"'],
+    'turn on the bedroom TV': [
+        ['say', '-v', VOICE, '"turning on the bedroom TV"'],
         ['ssh', 'hector', 'wemo', '-f', 'switch', 'bedroomtv', 'on']
     ],
-    'turn off the bedroom tv': [
-        ['say', '-v', VOICE, '"turning off the bedroom tv"'],
+    'turn off the bedroom TV': [
+        ['say', '-v', VOICE, '"turning off the bedroom TV"'],
         ['ssh', 'hector', 'wemo', '-f', 'switch', 'bedroomtv', 'off']
     ],
-    'turn on the livingroom tv': [
-        ['say', '-v', VOICE, '"turning on the livingroom tv"'],
-        ['ssh', 'hector', 'wemo', '-f', 'switch', 'bedroomtv', 'on']
+    'turn on the living room TV': [
+        ['say', '-v', VOICE, '"turning on the livingroom TV"'],
+        ['ssh', 'hector', 'wemo', '-f', 'switch', 'livingroomtv', 'on']
     ],
-    'turn off the livingroom tv': [
-        ['say', '-v', VOICE, '"turning off the livingroom tv"'],
-        ['ssh', 'hector', 'wemo', '-f', 'switch', 'bedroomtv', 'off']
+    'turn off the living room TV': [
+        ['say', '-v', VOICE, '"turning off the livingroom TV"'],
+        ['ssh', 'hector', 'wemo', '-f', 'switch', 'livingroomtv', 'off']
     ],
     'make the lights crazy': [
         ['say', '-v', VOICE, '"making the lights crazy"'],
@@ -87,12 +87,12 @@ COMMANDS = {
         ['python', 'plugins/hue.py', '3', 'bright'],
     ],
     'get the weather': [
-        ['say', '-v', VOICE, get_weather()]
+        #['say', '-v', VOICE, get_weather()]
     ],
     'what is the weather': [
-        ['say', '-v', VOICE, get_weather()]
+        #['say', '-v', VOICE, get_weather()]
     ],
     "what's the weather": [
-        ['say', '-v', VOICE, get_weather()]
+        #['say', '-v', VOICE, get_weather()]
     ],
 }

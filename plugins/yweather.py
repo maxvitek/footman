@@ -11,3 +11,7 @@ def get_weather():
     text = soup.find_all('yweather:condition')[0]['text']
 
     return "It's " + str(temp) + " degrees and " + text
+
+
+if __name__ == '__main__':
+    get_weather()
