@@ -26,24 +26,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="91549896-0c9b-4161-bbb2-b140522f03ae" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/footman/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/footman/command.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/footman/config.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/footman.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/footman/llt.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/footman/logger.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/footman/util.py" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/DroidCommander.iml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commander/__init__.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commander/config.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commander/llt.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commander/util.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/commander/voice.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/droid.py" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/roomba.py" afterPath="$PROJECT_DIR$/plugins/roomba.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/footman/llt.py" afterPath="$PROJECT_DIR$/footman/llt.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/yweather.py" afterPath="$PROJECT_DIR$/plugins/yweather.py" />
     </list>
     <ignored path="VoiceCommander.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -66,13 +50,42 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="footman.log" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="footman.log" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/footman.log">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="20" column="0" selection-start="1717" selection-end="1717" vertical-scroll-proportion="0.0" vertical-offset="300" max-vertical-offset="495">
+              <folding />
+            </state>
+          </provider>
           <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
             <state />
           </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="llt.py" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/footman/llt.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="0" selection-start="1717" selection-end="1717" vertical-scroll-proportion="0.38709676" vertical-offset="0" max-vertical-offset="775">
+            <state line="63" column="0" selection-start="2378" selection-end="2378" vertical-scroll-proportion="0.98859316" vertical-offset="165" max-vertical-offset="3390">
+              <folding>
+                <element signature="e#0#31#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="command.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/footman/command.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="128" max-vertical-offset="930">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="footman.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/footman.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="600">
               <folding />
             </state>
           </provider>
@@ -109,6 +122,7 @@
         <option value="$PROJECT_DIR$/footman.log" />
         <option value="$PROJECT_DIR$/commander/config.py" />
         <option value="$PROJECT_DIR$/commander/voice.py" />
+        <option value="$PROJECT_DIR$/footman/llt.py" />
       </list>
     </option>
   </component>
@@ -142,6 +156,9 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope">
+        <subPane subId="Problems" />
+      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -189,9 +206,6 @@
             </PATH_ELEMENT>
           </PATH>
         </subPane>
-      </pane>
-      <pane id="Scope">
-        <subPane subId="Problems" />
       </pane>
     </panes>
   </component>
@@ -302,9 +316,6 @@
       <option name="PARAMETERS" value="" />
       <method />
     </configuration>
-    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug" singleton="true">
-      <method />
-    </configuration>
     <configuration default="true" type="tests" factoryName="Unittests">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -326,6 +337,9 @@
       <option name="PUREUNITTEST" value="true" />
       <option name="PARAMS" value="" />
       <option name="USE_PARAM" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug" singleton="true">
       <method />
     </configuration>
     <configuration default="true" type="tests" factoryName="Doctests">
@@ -399,7 +413,11 @@
       <created>1393372163450</created>
       <updated>1393372163450</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="renamed to footman">
+      <created>1393629398560</created>
+      <updated>1393629398560</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -417,16 +435,16 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2846924" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.28826895" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.42771083" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -442,30 +460,64 @@
       <TodoPanelSettings />
     </option>
     <MESSAGE value="listen long time now built in" />
-    <option name="LAST_COMMIT_MESSAGE" value="listen long time now built in" />
+    <MESSAGE value="renamed to footman" />
+    <option name="LAST_COMMIT_MESSAGE" value="renamed to footman" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/footman.log">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="0" selection-start="1717" selection-end="1717" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="495">
+          <folding />
+        </state>
+      </provider>
       <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
         <state />
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/footman/llt.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="0" selection-start="1717" selection-end="1717" vertical-scroll-proportion="0.0" vertical-offset="300" max-vertical-offset="495">
+        <state line="63" column="0" selection-start="2378" selection-end="2378" vertical-scroll-proportion="0.0" vertical-offset="165" max-vertical-offset="3390">
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/footman/command.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="128" max-vertical-offset="930">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/footman.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="600">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/footman.log">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="0" selection-start="1717" selection-end="1717" vertical-scroll-proportion="0.0" vertical-offset="300" max-vertical-offset="495">
+          <folding />
+        </state>
+      </provider>
       <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
         <state />
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/footman.log">
       <provider selected="true" editor-type-id="text-editor">
         <state line="20" column="0" selection-start="1717" selection-end="1717" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="495">
           <folding />
         </state>
+      </provider>
+      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/plugins/roomba.py">
@@ -554,12 +606,35 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/footman.log">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="0" selection-start="1717" selection-end="1717" vertical-scroll-proportion="0.0" vertical-offset="300" max-vertical-offset="495">
+          <folding />
+        </state>
+      </provider>
       <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
         <state />
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/footman/command.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="0" selection-start="1717" selection-end="1717" vertical-scroll-proportion="0.38709676" vertical-offset="0" max-vertical-offset="775">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="930">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/footman.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="802">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/footman/llt.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="63" column="0" selection-start="2378" selection-end="2378" vertical-scroll-proportion="0.98859316" vertical-offset="165" max-vertical-offset="3390">
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

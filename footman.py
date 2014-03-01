@@ -2,9 +2,10 @@ __author__ = 'maxvitek'
 # -*- coding: utf-8 -*-
 from termcolor import colored
 import subprocess
+
+from llt import LongListener
 from footman.util import wipe
 from footman.command import detect_command
-from footman.llt import LongListener
 from footman.config import COMMAND_KEYWORD
 from pyfiglet import Figlet
 

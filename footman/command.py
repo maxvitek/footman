@@ -1,16 +1,21 @@
-import pyaudio
 import requests
 import subprocess
 from config import COMMANDS, COMMAND_KEYWORD, WOLFRAM_ALPHA_API_KEY, VOICE
 from bs4 import BeautifulSoup
 from logger import logger
 
-CHUNK = 1024
-FORMAT = pyaudio.paInt16
-CHANNELS = 1
-RATE = 44100
-RECORD_SECONDS = 3
-WAVE_OUTPUT_FILENAME = "output"
+
+class Command(object):
+    """
+    Abstraction of the commands you can give to footman.
+    These will primarily be subprocess.call()s or python
+    objects.
+    """
+    def __init__(self, *args, **kwargs):
+        pass
+
+    def execute(self):
+        pass
 
 
 def detect_command(data):
