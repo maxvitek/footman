@@ -1,0 +1,6 @@
+[Core]
+Name = Voice
+Module = voice
+
+[Documentation]
+Description = Footman voice plugin

@@ -1,61 +1,89 @@
-import requests
-import subprocess
-from config import COMMANDS, COMMAND_KEYWORD, WOLFRAM_ALPHA_API_KEY, VOICE
-from bs4 import BeautifulSoup
+from collections import defaultdict
+import re
+
 from logger import logger
+from yapsy.PluginManager import PluginManager
+
+from settings import COMMAND_KEYWORD
 
 
-class Command(object):
+class CommandControl(object):
     """
-    Abstraction of the commands you can give to footman.
-    These will primarily be subprocess.call()s or python
-    objects.
+    This class collects all of the available commands
+    from the plugins, handles a few special ones, and
+    then detects
     """
-    def __init__(self, *args, **kwargs):
-        pass
+    def __init__(self):
+        self.manager = None
+        self.commands = []
+        self.command_execution = False
 
-    def execute(self):
-        pass
+    def collect_commands(self):
+        self.manager = PluginManager()
+        self.manager.setPluginPlaces(['footman/plugins'])
+        self.manager.collectPlugins()
 
+        for plugin in sorted(self.manager.getAllPlugins(), key=lambda p: p.plugin_object.command_priority, reverse=True):
+            logger.debug('Plugin loaded: ' + plugin.name)
+            self.commands.append(plugin.plugin_object.commands)
+            logger.debug('Commands added: ' + str(len(plugin.plugin_object.commands)))
 
-def detect_command(data):
-    match = False
-    if not data:
-        pass
-    else:
-        for alt in data['result'][0]['alternative']:
-            for com in COMMANDS.keys():
-                if alt['transcript'] == COMMAND_KEYWORD + ' ' + com:
-                    match = True
-                    logger.info('Command: ' + com)
-                    for step in COMMANDS[com]:
-                        subprocess.call(step)
-                    break
-            if match:
-                break
+        return self
+
+    def detect(self, data):
+        logger.debug('Speech detected: ' + str(data))
+        if not data:
+            pass
         else:
-            text = data['result'][0]['alternative'][0]['transcript'].split()
-            if text[0] == COMMAND_KEYWORD:
-                logger.info('General Query: ' + ' '.join(text[1:]))
-                wolfram_query_params = {
-                    'input': ' '.join(text[1:]),
-                    'appid': WOLFRAM_ALPHA_API_KEY,
-                }
-                r = requests.get('http://api.wolframalpha.com/v2/query', params=wolfram_query_params)
-                soup = BeautifulSoup(r.text)
-                if soup.find(id='Result'):  # handles a clear result
-                    results = soup.find(id='Result').plaintext.string
-                elif soup.find(id='InstantaneousWeather:WeatherData'):  # handles a weather result
-                    results = soup.find(id='InstantaneousWeather:WeatherData').plaintext.string
-                elif soup.find(id='WeatherForecast:WeatherData'):
-                    results = soup.find(id='WeatherForecast:WeatherData').plaintext.string
-                elif soup.find(id='Definition:WordData'):
-                    results = soup.find(id='Definition:WordData').plaintext.string
-                else:
-                    results = ''
-                    print(soup.prettify())
-                subprocess.call(['say', '-v', VOICE, results])
+            # log entry
+            for alt in data['result'][0]['alternative']:
+                logger.debug('Possible transcript: ' + alt['transcript'])
 
-            else:
-                logger.info('Missing Keyword: ' + ' '.join(text[0:]))
+                if self.command_execution:
+                    break
 
+                # Check that the transcription is in the command form (keyword + command)
+                pattern = re.compile(COMMAND_KEYWORD + ' ' + '(?P<command>.*)')
+                supermatch = pattern.match(alt['transcript'])
+                if supermatch:
+                    # Everything that gets here is a command of some kind, we just need to match it:
+                    logger.debug('Supermatch: ' + str(supermatch.groupdict()))
+
+                    if self.command_execution:
+                        break
+
+                    # Figure out which command it is
+                    for command_group in self.commands:
+
+                        if self.command_execution:
+                            break
+
+                        for command_array in command_group:
+                            logger.debug('Attempting Commandgroup Match: ' + command_array)
+
+                            pattern = re.compile(command_array)
+                            submatch = pattern.match(supermatch.groupdict()['command'])
+                            if submatch:
+                                # Everything that gets here is a command of THIS kind
+                                logger.debug('Submatch: ' + str(submatch.groupdict()))
+
+                                # all RE groups must be named!
+                                if not submatch.groupdict():
+                                    raise Exception('all re matches here must be named: %s' % command_array)
+
+                                # this is our matched command, let's log it
+                                logger.info('Final transcript: ' + alt['transcript'])
+
+                                # execute command group
+                                logger.info('Executing command group: ' + str(command_group[command_array]))
+
+                                for command in command_group[command_array]:
+
+                                    # add the dict of re matches as the first argument
+                                    args = (submatch.groupdict(),) + command['args']
+                                    kwargs = command['kwargs']
+
+                                    # assemble command
+                                    command['command'](*args, **kwargs)
+
+                                    self.command_execution = True

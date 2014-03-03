@@ -1,0 +1,6 @@
+[Core]
+Name = Nest
+Module = nest
+
+[Documentation]
+Description = Footman Nest plugin

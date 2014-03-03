@@ -1,0 +1,6 @@
+[Core]
+Name = WolframAlpha
+Module = wolframalpha
+
+[Documentation]
+Description = Footman WA plugin
