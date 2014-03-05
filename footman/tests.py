@@ -91,3 +91,29 @@ test_start_chat = {
             }
         ]
 }
+
+test_start_robot = {
+    'result':
+        [
+            {
+                'alternative': [
+                    {
+                        'transcript': COMMAND_KEYWORD + ' ' + 'launch the black robot'
+                    }
+                ]
+            }
+        ]
+}
+
+test_stop_robot = {
+    'result':
+        [
+            {
+                'alternative': [
+                    {
+                        'transcript': COMMAND_KEYWORD + ' ' + 'dock the black robot'
+                    }
+                ]
+            }
+        ]
+}

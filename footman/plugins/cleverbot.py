@@ -118,6 +118,9 @@ class CleverbotPlugin(IPlugin):
         """
         Ends the chat session
         """
+        if not self.voice:
+            self.instantiate_voice()
+
         self.voice.say({}, 'Ok.  Nice chatting with you.')
         mc.set('footman_chat', None)
         return None

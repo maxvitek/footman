@@ -1,0 +1,6 @@
+[Core]
+Name = Roomba
+Module = roomba
+
+[Documentation]
+Description = Footman Roomba plugin
