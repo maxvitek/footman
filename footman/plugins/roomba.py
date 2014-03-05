@@ -1,6 +1,7 @@
 from roowifi import Roomba
 from yapsy.IPlugin import IPlugin
 from footman.settings import ROOMBAS
+import time
 
 
 class RoombaPlugin(IPlugin):
@@ -14,13 +15,13 @@ class RoombaPlugin(IPlugin):
         self.voice = None
         self.robots = []
         for r in ROOMBAS:
-            roo = Roomba(r['ip_address'])
+            roo = Roomba(r['ip_address'])  # is this slow?
             roo.name = r['name']
             self.robots.append(roo)
 
         self.commands = {
-            '.*(?P<command>launch|dock|clean).*(?P<robot>' + '|'.join([r.name for r in self.robots]) + \
-                '|all).*(robot|roomba).*': [
+            '.*(?P<command>start|dock|clean|stop).*(?P<robot>' + '|'.join([r.name for r in self.robots]) +
+            '|all).*(robot|roomba).*': [
                 {
                     'command': self.command,
                     'args': (None, None,),
@@ -45,30 +46,36 @@ class RoombaPlugin(IPlugin):
         else:
             robot_id_text = command_dict['robot']
 
+        print(robot_id_text)
+        print(command_text)
+
         if not self.voice:
             self.instantiate_voice()
 
-        if robot_id_text == 'all' and command_text == 'launch' or command_text == 'clean':
+        if robot_id_text == 'all' and (command_text == 'start' or command_text == 'clean'):
             self.voice.say({}, 'Launching all robots.')
             for r in self.robots:
                 r.idle()
                 r.clean()
-        elif robot_id_text == 'all' and command_text == 'dock':
+        elif robot_id_text == 'all' and (command_text == 'dock' or command_text == 'stop'):
             self.voice.say({}, 'Docking all robots.')
             for r in self.robots:
-                r.idle()
                 r.dock()
-        elif command_text == 'launch' or command_text == 'clean':
+            time.sleep(5)  # allow motors to spin down
+            for r in self.robots:
+                r.dock()
+        elif command_text == 'start' or command_text == 'clean':
             self.voice.say({}, 'Launching the ' + robot_id_text + ' robot.')
             for r in self.robots:
                 if r.name == robot_id_text:
                     r.idle()
                     r.clean()
-        elif command_text == 'dock':
+        elif command_text == 'dock' or command_text == 'stop':
             self.voice.say({}, 'Docking the ' + robot_id_text + ' robot.')
             for r in self.robots:
                 if r.name == robot_id_text:
-                    r.idle()
+                    r.dock()
+                    time.sleep(5)  # allow motors to spin down
                     r.dock()
 
         return None
