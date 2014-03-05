@@ -23,6 +23,7 @@ class WolframAlphaPlugin(IPlugin):
                     'command': self.speak_query_result,
                     'args': (None,),
                     'kwargs': {},
+                    'command_priority': 0,
                 },
             ]
         }

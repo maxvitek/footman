@@ -1,0 +1,6 @@
+[Core]
+Name = Cleverbot
+Module = cleverbot
+
+[Documentation]
+Description = Footman Cleverbot plugin

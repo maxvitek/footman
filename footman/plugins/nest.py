@@ -22,6 +22,7 @@ class NestPlugin(IPlugin):
                     'command': self.get_temp,
                     'args': (None,),
                     'kwargs': {},
+                    'command_priority': 0,
                 }
             ],
             'what.*(?P<nest_hum>indoor humid).*': [
@@ -29,6 +30,7 @@ class NestPlugin(IPlugin):
                     'command': self.get_humidity,
                     'args': (None,),
                     'kwargs': {},
+                    'command_priority': 0,
                 }
             ],
             'what.*(?P<nest_cond>indoor condition).*': [
@@ -36,6 +38,7 @@ class NestPlugin(IPlugin):
                     'command': self.get_conditions,
                     'args': (None,),
                     'kwargs': {},
+                    'command_priority': 0,
                 }
             ],
             'set.*indoor temp.*to (?P<set_nest_temp>\d*).*': [
@@ -43,6 +46,7 @@ class NestPlugin(IPlugin):
                     'command': self.set_temp,
                     'args': (None,),
                     'kwargs': {},
+                    'command_priority': 0,
                 }
             ],
         }

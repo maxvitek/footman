@@ -78,3 +78,16 @@ test_nest_set_temp = {
             }
         ]
 }
+
+test_start_chat = {
+    'result':
+        [
+            {
+                'alternative': [
+                    {
+                        'transcript': COMMAND_KEYWORD + ' ' + "let's chat"
+                    }
+                ]
+            }
+        ]
+}

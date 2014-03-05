@@ -1,7 +1,7 @@
 Footman
 =======
 
-Footman is a long-listening voice activated digital servant suitable
+Footman is a long-listening voice-activated digital servant suitable
 for binding different home automation paradigms to a unified interface.
 A central corps of workers takes commands from listeners.  New commands
 and abilities are added via a straight-forward plugin architecture.

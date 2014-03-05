@@ -1,5 +1,5 @@
-from collections import defaultdict
 import re
+from collections import OrderedDict
 
 from logger import logger
 from yapsy.PluginManager import PluginManager
@@ -25,7 +25,18 @@ class CommandControl(object):
 
         for plugin in sorted(self.manager.getAllPlugins(), key=lambda p: p.plugin_object.command_priority, reverse=True):
             logger.debug('Plugin loaded: ' + plugin.name)
-            self.commands.append(plugin.plugin_object.commands)
+
+            # this does some fancy stuff to give effect to the command priority that appears in the first command
+            # in each command group.
+            # it should probably be refactored due to the fact that it's hard to understand.
+
+            plugin_commands = OrderedDict(sorted(plugin.plugin_object.commands.items(),
+                                                 key=lambda c: c[1][0]['command_priority'],
+                                                 reverse=True))
+            for command_group in plugin_commands:
+                self.commands.append({
+                    command_group: plugin_commands[command_group]
+                })
             logger.debug('Commands added: ' + str(len(plugin.plugin_object.commands)))
 
         return self
@@ -87,3 +98,26 @@ class CommandControl(object):
                                     command['command'](*args, **kwargs)
 
                                     self.command_execution = True
+                else:
+                    logger.debug('No command keyword detected: %s' % COMMAND_KEYWORD)
+
+    def direct_command(self, command_text):
+        """
+        To facilitate testing, we can contruct a google-like response
+        containing arbitrary text.
+        """
+
+        direct_command = {
+            'result':
+                [
+                    {
+                        'alternative': [
+                            {
+                                'transcript': COMMAND_KEYWORD + ' ' + command_text
+                            }
+                        ]
+                    }
+                ]
+        }
+
+        self.detect(direct_command)

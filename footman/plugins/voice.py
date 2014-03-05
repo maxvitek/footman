@@ -25,6 +25,7 @@ class VoicePlugin(IPlugin):
                     'command': self.say,
                     'args': (None,),
                     'kwargs': {},
+                    'command_priority': 0,
                 }
             ]
         }
