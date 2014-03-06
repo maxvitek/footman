@@ -15,12 +15,13 @@ class RoombaPlugin(IPlugin):
         self.voice = None
         self.robots = []
         for r in ROOMBAS:
-            roo = Roomba(r['ip_address'])  # is this slow?
-            roo.name = r['name']
-            self.robots.append(roo)
+            self.robots.append({
+                'ip_address': r['ip_address'],
+                'name': r['name'],
+            })
 
         self.commands = {
-            '.*(?P<command>start|dock|clean|stop).*(?P<robot>' + '|'.join([r.name for r in self.robots]) +
+            '.*(?P<command>start|dock|clean|stop).*(?P<robot>' + '|'.join([r['name'] for r in self.robots]) +
             '|all).*(robot|roomba).*': [
                 {
                     'command': self.command,
@@ -55,28 +56,37 @@ class RoombaPlugin(IPlugin):
         if robot_id_text == 'all' and (command_text == 'start' or command_text == 'clean'):
             self.voice.say({}, 'Launching all robots.')
             for r in self.robots:
-                r.idle()
-                r.clean()
+                roo = Roomba(r['ip_address'])
+                roo.idle()
+                roo.clean()
         elif robot_id_text == 'all' and (command_text == 'dock' or command_text == 'stop'):
             self.voice.say({}, 'Docking all robots.')
             for r in self.robots:
-                r.dock()
+                roo = Roomba(r['ip_address'])
+                roo.idle()
+                roo.dock()
             time.sleep(5)  # allow motors to spin down
             for r in self.robots:
-                r.dock()
+                roo = Roomba(r['ip_address'])
+                roo.idle()
+                roo.dock()
         elif command_text == 'start' or command_text == 'clean':
             self.voice.say({}, 'Launching the ' + robot_id_text + ' robot.')
             for r in self.robots:
-                if r.name == robot_id_text:
-                    r.idle()
-                    r.clean()
+                if r['name'] == robot_id_text:
+                    roo = Roomba(r['ip_address'])
+                    roo.idle()
+                    roo.clean()
         elif command_text == 'dock' or command_text == 'stop':
             self.voice.say({}, 'Docking the ' + robot_id_text + ' robot.')
             for r in self.robots:
-                if r.name == robot_id_text:
-                    r.dock()
+                if r['name'] == robot_id_text:
+                    roo = Roomba(r['ip_address'])
+                    roo.idle()
+                    roo.dock()
                     time.sleep(5)  # allow motors to spin down
-                    r.dock()
+                    roo.idle()
+                    roo.dock()
 
         return None
 

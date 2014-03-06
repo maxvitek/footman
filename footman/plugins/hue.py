@@ -1,7 +1,17 @@
 import phue
+import logging
+from yapsy.IPlugin import IPlugin
+from footman.settings import HUE_USER, HUE_IP_ADDRESS
 
-HUE_IP = '10.0.1.19'
-HUE_USER = 'maximillianvitek'
+
+class HuePlugin(IPlugin):
+    """
+    Abstraction of the Hue plugin.
+    """
+    def __init__(self):
+        IPlugin.__init__(self)
+        self.log = logging.getLogger(__name__)
+
 
 # # get the commandline arguments
 # cmd = str(sys.argv)

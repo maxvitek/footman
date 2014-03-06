@@ -1,7 +1,6 @@
 import re
 from collections import OrderedDict
-
-from logger import logger
+import logging
 from yapsy.PluginManager import PluginManager
 
 from settings import COMMAND_KEYWORD
@@ -17,6 +16,8 @@ class CommandControl(object):
         self.manager = None
         self.commands = []
         self.command_execution = False
+        self.log = logging.getLogger(__name__)
+        self.root_logger = logging.getLogger().setLevel(logging.DEBUG)
 
     def collect_commands(self):
         self.manager = PluginManager()
@@ -24,7 +25,7 @@ class CommandControl(object):
         self.manager.collectPlugins()
 
         for plugin in sorted(self.manager.getAllPlugins(), key=lambda p: p.plugin_object.command_priority, reverse=True):
-            logger.debug('Plugin loaded: ' + plugin.name)
+            self.log.debug('Plugin loaded: ' + plugin.name)
 
             # this does some fancy stuff to give effect to the command priority that appears in the first command
             # in each command group.
@@ -37,18 +38,18 @@ class CommandControl(object):
                 self.commands.append({
                     command_group: plugin_commands[command_group]
                 })
-            logger.debug('Commands added: ' + str(len(plugin.plugin_object.commands)))
+            self.log.debug('Commands added: ' + str(len(plugin.plugin_object.commands)))
 
         return self
 
     def detect(self, data):
-        logger.debug('Speech detected: ' + str(data))
+        self.log.debug('Speech detected: ' + str(data))
         if not data:
             pass
         else:
             # log entry
             for alt in data['result'][0]['alternative']:
-                logger.debug('Possible transcript: ' + alt['transcript'])
+                self.log.debug('Possible transcript: ' + alt['transcript'])
 
                 if self.command_execution:
                     break
@@ -58,7 +59,7 @@ class CommandControl(object):
                 supermatch = pattern.match(alt['transcript'])
                 if supermatch:
                     # Everything that gets here is a command of some kind, we just need to match it:
-                    logger.debug('Supermatch: ' + str(supermatch.groupdict()))
+                    self.log.debug('Supermatch: ' + str(supermatch.groupdict()))
 
                     if self.command_execution:
                         break
@@ -70,23 +71,23 @@ class CommandControl(object):
                             break
 
                         for command_array in command_group:
-                            logger.debug('Attempting Commandgroup Match: ' + command_array)
+                            self.log.debug('Attempting Commandgroup Match: ' + command_array)
 
                             pattern = re.compile(command_array)
-                            submatch = pattern.match(supermatch.groupdict()['command'])
+                            submatch = pattern.match(supermatch.groupdict()['command'].lower())
                             if submatch:
                                 # Everything that gets here is a command of THIS kind
-                                logger.debug('Submatch: ' + str(submatch.groupdict()))
+                                self.log.debug('Submatch: ' + str(submatch.groupdict()))
 
                                 # all RE groups must be named!
                                 if not submatch.groupdict():
                                     raise Exception('all re matches here must be named: %s' % command_array)
 
                                 # this is our matched command, let's log it
-                                logger.info('Final transcript: ' + alt['transcript'])
+                                self.log.info('Final transcript: ' + alt['transcript'])
 
                                 # execute command group
-                                logger.info('Executing command group: ' + str(command_group[command_array]))
+                                self.log.info('Executing command group: ' + str(command_group[command_array]))
 
                                 for command in command_group[command_array]:
 
@@ -99,7 +100,7 @@ class CommandControl(object):
 
                                     self.command_execution = True
                 else:
-                    logger.debug('No command keyword detected: %s' % COMMAND_KEYWORD)
+                    self.log.debug('No command keyword detected: %s' % COMMAND_KEYWORD)
 
     def direct_command(self, command_text):
         """

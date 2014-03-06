@@ -1,0 +1,6 @@
+[Core]
+Name = Wemo
+Module = wemo
+
+[Documentation]
+Description = Footman Wemo plugin

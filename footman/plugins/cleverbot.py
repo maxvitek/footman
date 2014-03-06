@@ -4,6 +4,7 @@ from yapsy.IPlugin import IPlugin
 import memcache
 import datetime
 from footman.settings import MEMCACHED_HOST
+import logging
 
 mc = memcache.Client([MEMCACHED_HOST], debug=0)
 
@@ -35,6 +36,7 @@ class CleverbotPlugin(IPlugin):
     def __init__(self):
         IPlugin.__init__(self)
         self.chat = mc.get('footman_chat')
+        self.log = logging.getLogger(__name__)
 
         # are we in a chat?
         if self.chat and not self.chat.expired() and self.chat.ready:
@@ -74,7 +76,7 @@ class CleverbotPlugin(IPlugin):
             self.chat = CleverbotChat()
             self.command_priority = 1
             self.commands = {
-                "(?P<chat>let's chat)": [
+                "(?P<chat>let's chat|we need to talk)": [
                     {
                         'command': self.chat_some,
                         'args': (None,),
@@ -96,6 +98,8 @@ class CleverbotPlugin(IPlugin):
             chat_text = chat_dict['chat']
 
         reply = self.chatbot.ask(chat_text)
+
+        self.log.info('Chat reply: ' + reply)
 
         if not self.voice:
             self.instantiate_voice()
@@ -120,6 +124,8 @@ class CleverbotPlugin(IPlugin):
         """
         if not self.voice:
             self.instantiate_voice()
+
+        self.log.info('Chat signoff.')
 
         self.voice.say({}, 'Ok.  Nice chatting with you.')
         mc.set('footman_chat', None)

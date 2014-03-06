@@ -117,3 +117,29 @@ test_stop_robot = {
             }
         ]
 }
+
+test_turn_on_brtv = {
+    'result':
+        [
+            {
+                'alternative': [
+                    {
+                        'transcript': COMMAND_KEYWORD + ' ' + 'turn on the bedroom tv'
+                    }
+                ]
+            }
+        ]
+}
+
+test_turn_off_brtv = {
+    'result':
+        [
+            {
+                'alternative': [
+                    {
+                        'transcript': COMMAND_KEYWORD + ' ' + 'turn off the bedroom tv'
+                    }
+                ]
+            }
+        ]
+}

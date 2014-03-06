@@ -1,4 +1,5 @@
 import pyttsx
+import logging
 from yapsy.IPlugin import IPlugin
 from footman.settings import VOICE_ID, PYOBJC_PATH
 import sys
@@ -16,6 +17,7 @@ class VoicePlugin(IPlugin):
         IPlugin.__init__(self)
         self.command_priority = 1
         self.engine = pyttsx.init()
+        self.log = logging.getLogger(__name__)
         if VOICE_ID:
             self.engine.setProperty('voice', VOICE_ID)
 
