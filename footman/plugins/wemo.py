@@ -3,6 +3,7 @@ import logging
 from yapsy.IPlugin import IPlugin
 import memcache
 from footman.settings import MEMCACHED_HOST
+from footman.util import get_ip_addresses
 
 
 mc = memcache.Client([MEMCACHED_HOST], debug=0)
@@ -16,8 +17,16 @@ class WemoPlugin(IPlugin):
         IPlugin.__init__(self)
         self.command_priority = 1
         self.voice = None
-        self.env = Environment(with_cache=False)
-        self.env.start()
+        bind_port = 54321  # number
+        host = get_ip_addresses()[0]  # we just grab the first one that isn't local
+        while bind_port < 54329:
+            bind = '{0}:{1}'.format(host, str(bind_port))
+            try:
+                self.env = Environment(bind=bind, with_subscribers=False)
+                self.env.start()
+                break
+            except:
+                bind_port += 1
 
         # retrieve or create device cache
         self.devices = mc.get('footman_wemo_cache')
