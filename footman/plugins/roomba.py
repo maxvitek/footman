@@ -47,9 +47,6 @@ class RoombaPlugin(IPlugin):
         else:
             robot_id_text = command_dict['robot']
 
-        print(robot_id_text)
-        print(command_text)
-
         if not self.voice:
             self.instantiate_voice()
 
