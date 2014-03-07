@@ -14,6 +14,7 @@ class HuePlugin(IPlugin):
     """
     def __init__(self):
         IPlugin.__init__(self)
+        self.command_priority = 1
         self.log = logging.getLogger(__name__)
         self.voice = None
         self.bridge = None
@@ -22,11 +23,11 @@ class HuePlugin(IPlugin):
             self.bridge = Bridge(ip=HUE_IP_ADDRESS, username=HUE_USER)
             self.api_data = self.bridge.get_api()
             self.lights = [self.api_data['lights'][key]['name'] for key in self.api_data['lights'].keys()]
-            mc.set('footman_lights')
+            mc.set('footman_lights', self.lights)
 
         self.commands = {
             '.*(?P<command>turn on|turn off|dim|bright|crazy).*(?P<light>' + '|'.join([l for l in self.lights]) +
-            '|all).*(robot|roomba).*': [
+            '|all).*light.*': [
                 {
                     'command': self.command,
                     'args': (None, None,),
@@ -53,6 +54,9 @@ class HuePlugin(IPlugin):
 
         if not self.voice:
             self.instantiate_voice()
+
+        if not self.bridge:
+            self.bridge = Bridge(ip=HUE_IP_ADDRESS, username=HUE_USER)
 
         if light_id_text == 'all' and command_text == 'turn on':
             self.bridge.set_light(self.lights, 'on', True)

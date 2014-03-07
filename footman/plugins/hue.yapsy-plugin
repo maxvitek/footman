@@ -1,0 +1,6 @@
+[Core]
+Name = Hue
+Module = hue
+
+[Documentation]
+Description = Footman Hue plugin
