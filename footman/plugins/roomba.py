@@ -21,7 +21,7 @@ class RoombaPlugin(IPlugin):
             })
 
         self.commands = {
-            '.*(?P<command>start|dock|clean|stop).*(?P<robot>' + '|'.join([r['name'] for r in self.robots]) +
+            '.*(?P<command>start|dock|clean|stop).*(?P<robot>' + '|'.join([r['name'].lower() for r in self.robots]) +
             '|all).*(robot|roomba).*': [
                 {
                     'command': self.command,

@@ -26,7 +26,7 @@ class HuePlugin(IPlugin):
             mc.set('footman_lights', self.lights)
 
         self.commands = {
-            '.*(?P<command>turn on|turn off|dim|bright|crazy).*(?P<light>' + '|'.join([l for l in self.lights]) +
+            '.*(?P<command>turn on|turn off|dim|bright|crazy).*(?P<light>' + '|'.join([l.lower() for l in self.lights]) +
             '|all).*light.*': [
                 {
                     'command': self.command,
@@ -59,39 +59,49 @@ class HuePlugin(IPlugin):
             self.bridge = Bridge(ip=HUE_IP_ADDRESS, username=HUE_USER)
 
         if light_id_text == 'all' and command_text == 'turn on':
-            self.bridge.set_light(self.lights, 'on', True)
-            self.bridge.set_light(self.lights, 'bri', 127)
+            self.bridge.set_light([str(light) for light in self.lights], 'on', True)
+            self.bridge.set_light([str(light) for light in self.lights], 'bri', 127)
             self.voice.say({}, 'All lights turned on')
         elif light_id_text == 'all' and command_text == 'turn off':
-            self.bridge.set_light(self.lights, 'on', False)
+            self.bridge.set_light([str(light) for light in self.lights], 'on', False)
             self.voice.say({}, 'All lights turned off')
         elif light_id_text == 'all' and command_text == 'bright':
-            self.bridge.set_light(self.lights, 'on', False)
-            self.bridge.set_light(self.lights, 'bri', 254)
+            self.bridge.set_light([str(light) for light in self.lights], 'on', False)
+            self.bridge.set_light([str(light) for light in self.lights], 'bri', 254)
         elif light_id_text == 'all' and command_text == 'dim':
-            self.bridge.set_light(self.lights, 'on', False)
-            self.bridge.set_light(self.lights, 'bri', 25)
+            self.bridge.set_light([str(light) for light in self.lights], 'on', False)
+            self.bridge.set_light([str(light) for light in self.lights], 'bri', 25)
             self.voice.say({}, 'All lights dimmed')
         elif light_id_text == 'all' and command_text == 'crazy':
-            self.bridge.set_light(self.lights, 'on', False)
-            self.bridge.set_light(self.lights, 'effect', 'colorloop')
+            self.bridge.set_light([str(light) for light in self.lights], 'on', False)
+            self.bridge.set_light([str(light) for light in self.lights], 'effect', 'colorloop')
             self.voice.say({}, 'All lights rotating colors')
         elif command_text == 'turn on':
-            self.bridge.set_light(light_id_text, 'on', True)
-            self.bridge.set_light(light_id_text, 'bri', 127)
-            self.voice.say({}, light_id_text + ' light turned on')
+            for light in self.lights:
+                if light.lower() == light_id_text:
+                    self.bridge.set_light(str(light), 'on', True)
+                    self.bridge.set_light(str(light), 'bri', 127)
+                    self.voice.say({}, light + ' light turned on')
         elif command_text == 'turn off':
-            self.bridge.set_light(light_id_text, 'on', False)
-            self.voice.say({}, light_id_text + ' light turned off')
+            for light in self.lights:
+                if light.lower() == light_id_text:
+                    self.bridge.set_light(str(light), 'on', False)
+                    self.voice.say({}, light + ' light turned off')
         elif command_text == 'bright':
-            self.bridge.set_light(light_id_text, 'bri', 254)
-            self.voice.say({}, light_id_text + ' light brightened')
+            for light in self.lights:
+                if light.lower() == light_id_text:
+                    self.bridge.set_light(str(light), 'bri', 254)
+                    self.voice.say({}, light + ' light brightened')
         elif command_text == 'dim':
-            self.bridge.set_light(light_id_text, 'bri', 25)
-            self.voice.say({}, light_id_text + ' light dimmed')
+            for light in self.lights:
+                if light.lower() == light_id_text:
+                    self.bridge.set_light(str(light), 'bri', 25)
+                    self.voice.say({}, light + ' light dimmed')
         elif command_text == 'crazy':
-            self.bridge.set_light(light_id_text, 'effect', 'colorloop')
-            self.voice.say({}, light_id_text + ' light rotating colors')
+            for light in self.lights:
+                if light.lower() == light_id_text:
+                    self.bridge.set_light(str(light), 'effect', 'colorloop')
+                    self.voice.say({}, light + ' light rotating colors')
 
         return None
 

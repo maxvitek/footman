@@ -72,8 +72,6 @@ class WemoPlugin(IPlugin):
             raise Exception('Device unknown')
 
         self.env.discover(5)
-        print(device_id_text)
-        print(self.env.list_switches())
 
         switch = self.env.get_switch(device_id_text)
 

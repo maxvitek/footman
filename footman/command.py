@@ -17,7 +17,7 @@ class CommandControl(object):
         self.commands = []
         self.command_execution = False
         self.log = logging.getLogger(__name__)
-        self.root_logger = logging.getLogger().setLevel(logging.DEBUG)
+        self.root_logger = logging.getLogger().setLevel(logging.INFO)
 
     def collect_commands(self):
         self.manager = PluginManager()
@@ -84,10 +84,10 @@ class CommandControl(object):
                                     raise Exception('all re matches here must be named: %s' % command_array)
 
                                 # this is our matched command, let's log it
-                                self.log.info('Final transcript: ' + alt['transcript'])
+                                self.log.info('Final: ' + alt['transcript'])
 
                                 # execute command group
-                                self.log.info('Executing command group: ' + str(command_group[command_array]))
+                                self.log.debug('Executing command group: ' + str(command_group[command_array]))
 
                                 for command in command_group[command_array]:
 
