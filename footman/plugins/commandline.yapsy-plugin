@@ -1,0 +1,6 @@
+[Core]
+Name = CommandLine
+Module = commandline
+
+[Documentation]
+Description = Footman Command Line plugin

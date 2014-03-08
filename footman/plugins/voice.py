@@ -1,8 +1,9 @@
 import pyttsx
 import logging
 from yapsy.IPlugin import IPlugin
-from footman.settings import VOICE_ID, PYOBJC_PATH
+from footman.settings import VOICE_ID, PYOBJC_PATH, COMMAND_KEYWORD
 import sys
+import re
 
 if PYOBJC_PATH not in sys.path:
     sys.path.extend([PYOBJC_PATH])
@@ -43,9 +44,31 @@ class VoicePlugin(IPlugin):
         else:
             speech_text = speech_dict['speech']
 
+        speech_text = apply_replacements_to_abbreviations(speech_text)
+
+        self.log.info(COMMAND_KEYWORD + ': ' + speech_text)
+
         self.engine.say(speech_text)
         self.engine.runAndWait()
         if self.engine._inLoop:
             self.engine.endLoop()
 
         return None
+
+
+def apply_replacements_to_abbreviations(raw_text):
+    regex_replacements = [
+        ('(\s)ms(\s)', r'\1miliseconds\2'),
+        ('Mbit/s', 'mega bits per second'),
+        ('\n', ',,,\n'),
+    ]
+
+    text = raw_text
+
+    for r in regex_replacements:
+        text = re.sub(
+            r[0], r[1],
+            text
+        )
+
+    return text
