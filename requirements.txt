@@ -1,0 +1,14 @@
+cleverbot2==0.0.3
+ListenLongtime==0.0.3
+roowifi==0.0.1
+beautifulsoup4==4.3.2
+amqp==1.4.3
+Yapsy==1.10.223
+ouimeaux==0.7.2
+phue==0.7
+pyfiglet==0.6.1
+requests==1.2.3
+wolframalpha==1.0.2
+termcolor==1.1.0
+celery==3.1.9
+honcho==0.5.0

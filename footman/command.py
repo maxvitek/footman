@@ -100,7 +100,7 @@ class CommandControl(object):
 
                                     self.command_execution = True
                 else:
-                    self.log.debug('No command keyword detected: %s' % COMMAND_KEYWORD)
+                    self.log.info('No command keyword detected: %s' % COMMAND_KEYWORD)
 
     def direct_command(self, command_text):
         """
