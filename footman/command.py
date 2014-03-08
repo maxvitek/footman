@@ -49,7 +49,7 @@ class CommandControl(object):
         else:
             # log entry
             for alt in data['result'][0]['alternative']:
-                self.log.debug('Possible transcript: ' + alt['transcript'])
+                self.log.info('Possible transcript: ' + alt['transcript'])
 
                 if self.command_execution:
                     break
@@ -84,9 +84,10 @@ class CommandControl(object):
                                     raise Exception('all re matches here must be named: %s' % command_array)
 
                                 # this is our matched command, let's log it
-                                self.log.info('Final: ' + alt['transcript'])
+                                self.log.info('Final transcript: ' + alt['transcript'])
 
                                 # execute command group
+                                self.log.info('Executing command')
                                 self.log.debug('Executing command group: ' + str(command_group[command_array]))
 
                                 for command in command_group[command_array]:
