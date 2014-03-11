@@ -1,6 +1,6 @@
 cleverbot2==0.0.3
-ListenLongtime==0.0.3
-roowifi==0.0.1
+ListenLongtime==0.0.6
+roowifi==0.0.2
 beautifulsoup4==4.3.2
 amqp==1.4.3
 Yapsy==1.10.223
@@ -14,3 +14,7 @@ celery==3.1.9
 honcho==0.5.0
 PyAudio==0.2.7
 netifaces==0.8
+argparse-actions==0.4.4
+python-memcached==1.53
+Nest-API==0.0.1
+pyttsx==1.1

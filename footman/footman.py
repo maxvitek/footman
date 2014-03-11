@@ -23,7 +23,7 @@ def header():
 
 def prompt():
     while True:
-        ll = LongListener(vis=True, silence_threshold=2500)
+        ll = LongListener(vis=True)
         speech_data = ll.listen()
         process_speech.delay((speech_data))
         wipe(20)
