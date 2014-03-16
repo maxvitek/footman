@@ -1,0 +1,6 @@
+[Core]
+Name = Apex
+Module = apex
+
+[Documentation]
+Description = Footman Apex plugin
