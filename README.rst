@@ -19,7 +19,7 @@ Use honcho to launch:
 
     $ honcho start listener
     ...
-    $ honcho start footman
+    $ python launch.py
     ...
 
 Contribute
